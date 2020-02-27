@@ -9,14 +9,15 @@ def ClosestClassicalState(r, K, eta,U,t):
     an = eta * np.exp(-2 * r) + 1 - eta
     ss = 0.25 * np.log(ap/an)
     ns = 0.5 * (np.sqrt(ap * an) - 1)
-    s0= 0.5 * np.log((2*ns+1) / t)
+    sc = 0.5 * np.log(2 * ns + 1)
+    nt = 0.5 - 0.5 * np.sqrt(1 + 2 * t * np.sinh(2 * sc) * np.exp(2 * ss))
+    s0= 0.5 * np.log((2*nt+1) / t)
     if ss < s0:
         st = ss
         nt = ns
     else:
-        sc = 0.5 * np.log(2 * ns + 1)
-        st = ss
-        nt = 0.5 - 0.5 * np.sqrt(1 + 2 * t * np.sinh(2 * sc) * np.exp(2 * ss))
+        s0 = 0.5 * np.log((2 * nt + 1) / t)
+        st = s0
 
 
 
